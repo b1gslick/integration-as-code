@@ -5,6 +5,7 @@ import (
 	"encoding/hex"
 	"log"
 	"net/http"
+	"os"
 
 	"github.com/gin-gonic/gin"
 )
@@ -14,9 +15,12 @@ func main() {
 	// Define routes
 	router.POST("/hash", requestCalculate)
 
+	host := os.Getenv("host")
+	port := os.Getenv("port")
+
 	log.Println("Starting server")
 	// Start the server
-	log.Fatal(router.Run("127.0.0.1:8080"))
+	log.Fatal(router.Run(host + ":" + port))
 }
 
 type Income struct {
