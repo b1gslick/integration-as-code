@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import Select from "react-select/dist/declarations/src/Select";
 import LargeData, { LargeDataType } from "./api/requests";
 import "./App.css";
 
