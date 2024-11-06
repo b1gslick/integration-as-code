@@ -10,22 +10,26 @@ from service.database import engine
 
 models.Base.metadata.create_all(bind=engine)
 
-app = FastAPI()
-app.include_router(router)
-logger = logging.getLogger("uvicorn.error")
 
-origins = [
-    "http://localhost:3000",
-    "http://localhost:8080",
-]
+def create_app() -> FastAPI:
+    app = FastAPI()
+    app.include_router(router)
 
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=origins,
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
+    origins = [
+        "http://localhost:3000",
+        "http://localhost:8080",
+    ]
+
+    app.add_middleware(
+        CORSMiddleware,
+        allow_origins=origins,
+        allow_credentials=True,
+        allow_methods=["*"],
+        allow_headers=["*"],
+    )
+    return app
+
 
 if __name__ == "__main__":
-    uvicorn.run(app, log_level="trace")
+    logger = logging.getLogger("uvicorn.error")
+    uvicorn.run(create_app(), log_level="trace")
