@@ -1,6 +1,9 @@
+import logging
+import uuid
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
 
+from app.utils import calculate_hash
 from service import models, schemas
 from service.database import get_db
 
@@ -16,18 +19,27 @@ async def get_all_large_data(db: Session = Depends(get_db)):
     return data
 
 
-@router.post(
-    "/", status_code=status.HTTP_201_CREATED, response_model=list[schemas.LargeDataBase]
-)
+@router.post("/", status_code=status.HTTP_201_CREATED, response_model=str)
 async def post_large_data(
     post_data: schemas.LargeDataBase, db: Session = Depends(get_db)
 ):
-    new_data = models.LargeData(**post_data.model_dump())
+    _id = uuid.uuid4()
+
+    hash = await calculate_hash(post_data.big_data)
+
+    if hash is None:
+        hash = ""
+
+    new_data = models.LargeData(
+        id=_id,
+        hash=hash,
+        big_data=post_data.big_data,
+    )
     db.add(new_data)
     db.commit()
     db.refresh(new_data)
 
-    return [new_data]
+    return hash
 
 
 @router.get(

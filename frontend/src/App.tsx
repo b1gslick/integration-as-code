@@ -1,39 +1,26 @@
 import React, { useEffect, useState } from "react";
+import Select from "react-select/dist/declarations/src/Select";
+import LargeData, { LargeDataType } from "./api/requests";
 import "./App.css";
 
 const App = () => {
   const [largeData, setLargeData] = useState("");
   const [readWrite, setReadWrite] = useState(false);
+  const [allRowsData, setAllRowsData] = useState(Array<LargeDataType>);
+  const [isNew, setIsNew] = useState(false);
+  const [currentId, setCurrentId] = useState("");
+  // const url = process.env.BACKEND;
+  const url = "http://localhost:8000";
+  const redisHost = "";
+  const redisPort = 0;
+  const ld = new LargeData(url, redisHost, redisPort);
 
   useEffect(() => {
-    if (!readWrite) {
-      getLargeData(0);
-    } else {
-      postLargeData(largeData);
-    }
-  });
+    fetchAllRows();
+  }, []);
 
-  const getLargeData = (id: number) => {
-    fetch(`${process.env.BACKEND}`, {
-      method: "GET",
-      headers: {
-        "X-RapidAPI-Key": "your-api-key",
-        "X-RapidAPI-Host": "jokes-by-api-ninjas.p.rapidapi.com",
-      },
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        setLargeData(data[0].joke);
-        console.log(data);
-      })
-      .catch((error) => console.log(error));
-  };
-  const postLargeData = (data: string) => {};
-
-  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    event.preventDefault();
-    let inputValue = event.target.value;
-    console.log(event.target.value); // You will the value here. you can simply pass the value to the function
+  const fetchAllRows = async () => {
+    setAllRowsData(await ld.getAll());
   };
 
   const handleLargeData = (event: any) => {
@@ -43,18 +30,59 @@ const App = () => {
     const value = (ev.target as HTMLInputElement).checked;
     setReadWrite(value);
   };
+  const postData = async () => {
+    if (isNew) {
+      await ld.postLargeData(largeData);
+    } else {
+      await ld.updateLargeData(largeData, currentId);
+    }
+  };
+  const selectedRow = async (ev: any) => {
+    console.log(largeData);
+    setCurrentId(ev.target.value[0]);
+    if (ev.target.value === "") {
+      setIsNew(true);
+    }
+    setLargeData(ev.target.value[1]);
+  };
+
   return (
     <div className="App">
-      <input type={"checkbox"} onChange={onToggle} checked={readWrite}></input>
-      <input type={"text"} onChange={handleInputChange}></input>
-      <textarea
-        value={largeData}
-        disabled={!readWrite}
-        onChange={handleLargeData}
-      ></textarea>
-      <button disabled={!readWrite} name="save">
-        Save data
-      </button>
+      <div>
+        <label htmlFor="select"></label>
+        <select className="select__large_data" onChange={selectedRow}>
+          <option key={0} value={""}>
+            new post
+          </option>
+          {allRowsData.map((row) => {
+            return (
+              <option key={row.id} value={[row.hash, row.big_data]}>
+                {row.hash}
+              </option>
+            );
+          })}
+        </select>
+      </div>
+
+      <div>
+        <input
+          type={"checkbox"}
+          onChange={onToggle}
+          checked={readWrite}
+        ></input>
+      </div>
+      <div>
+        <textarea
+          value={largeData}
+          disabled={!readWrite}
+          onChange={handleLargeData}
+        ></textarea>
+      </div>
+      <div>
+        <button disabled={!readWrite} name="save" onClick={postData}>
+          Save data
+        </button>
+      </div>
     </div>
   );
 };

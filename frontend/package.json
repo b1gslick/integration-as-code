@@ -10,14 +10,24 @@
     "@types/node": "^16.18.117",
     "@types/react": "^18.3.12",
     "@types/react-dom": "^18.3.1",
+    "assert": "^2.1.0",
+    "axios": "^1.7.7",
+    "buffer": "^6.0.3",
+    "crypto": "^1.0.1",
+    "crypto-browserify": "^3.12.1",
+    "ioredis": "^5.4.1",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-scripts": "5.0.1",
+    "react-select": "^5.8.2",
+    "redis": "^4.7.0",
+    "stream-browserify": "^3.0.0",
     "typescript": "^4.9.5",
+    "util": "^0.12.5",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "env-cmd -f .env react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
@@ -39,5 +49,14 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@types/ioredis": "^4.28.10",
+    "@types/redis": "^4.0.10",
+    "env-cmd": "^10.1.0"
+  },
+  "browser": {
+    "crypto": false,
+    "stream": false
   }
 }
