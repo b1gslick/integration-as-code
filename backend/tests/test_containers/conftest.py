@@ -8,11 +8,11 @@ from httpx import ASGITransport, AsyncClient
 from testcontainers.postgres import PostgresContainer, os
 
 from app.main import create_app
+from tests.hash_service import HashService
 
 
-@pytest.fixture(scope="module", autouse=True)
+@pytest.fixture(scope="function", autouse=True)
 def database_container_setup() -> Generator[PostgresContainer, Any, Any]:
-    logging.warning("start")
     with PostgresContainer(
         "postgres:16-alpine",
         port=5432,
@@ -32,8 +32,13 @@ async def client() -> AsyncGenerator[AsyncClient, None]:
     async with AsyncClient(
         transport=ASGITransport(app=create_app()),
         base_url="http://testserver",
-        headers={
-            "Authorization": "Bearer token",
-        },
     ) as client:
         yield client
+
+
+@pytest.fixture()
+def hash_service() -> Generator[HashService, Any, Any]:
+    with HashService("hash_calculator-server", host="0.0.0.0").with_name(
+        "hash_service"
+    ) as hash:
+        yield hash

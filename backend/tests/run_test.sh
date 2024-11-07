@@ -72,7 +72,7 @@ if [[ $tests_only = false ]]; then
   done
 fi
 
-poetry run pytest -k old_aproach
+poetry run pytest -k old_approach
 
 if [[ $tests_only = false && $keep_db = false ]]; then
   docker kill $container_name
