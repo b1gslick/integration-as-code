@@ -17,6 +17,7 @@ python-dotenv = "^1.0.1"
 psycopg2-binary = "^2.9.10"
 requests = "^2.32.3"
 httpx = "^0.27.2"
+testcontainers = "^4.8.2"
 
 [build-system]
 requires = ["poetry-core"]
@@ -34,10 +35,10 @@ testcontainers = "^4.8.1"
 [tool.pytest.ini_options]
 asyncio_mode = "strict"
 log_cli = true
-log_cli_level = "WARN"
+log_cli_level = "DEBUG"
 log_cli_format = "%(asctime)s [%(levelname)s] %(filename)s:%(lineno)s %(message)s"
 log_cli_date_format = "%Y-%m-%d %H:%M:%S"
-env = ['D:LOG_LEVEL=WARN', 'D:db_drivername=poestgresql']
+env = ['D:LOG_LEVEL=WARN']
 testpaths = ["tests"]
 
 [tool.ruff]
