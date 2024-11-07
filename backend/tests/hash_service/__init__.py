@@ -1,6 +1,4 @@
-from testcontainers.core.container import Optional, wait_container_is_ready
 from testcontainers.core.generic import DockerContainer
-from testcontainers.core.utils import logging
 
 
 class HashService(DockerContainer):
