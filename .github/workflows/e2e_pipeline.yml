@@ -16,6 +16,7 @@ jobs:
       image_url: t1mon1106/integation-as-code
       docker_filename: ./backend/Dockerfile
       docker_context: ./backend/
-      username: ${{ secrets.DOCKER_USERNAME }}
-      password: ${{ secrets.DOCKER_PASSWORD }}
+    secrets:
+      DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+      DOCKER_PASSWORD : ${{ secrets.DOCKER_PASSWORD }}
 
