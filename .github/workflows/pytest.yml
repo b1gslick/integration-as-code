@@ -29,4 +29,4 @@ jobs:
       - name: Install poetry dep
         run: cd ./backend && poetry install --no-root
       - name: Run the automated tests (for example)
-        run: poetry run pytest -v
+        run: cd ./backend && poetry run pytest -v
