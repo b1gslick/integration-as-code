@@ -38,7 +38,7 @@ async def client() -> AsyncGenerator[AsyncClient, None]:
 @pytest.fixture()
 def hash_service() -> Generator[HashService, Any, Any]:
     with (
-        HashService("hash_calculator-server", host="0.0.0.0")
+        HashService("t1mon1106/hash-calculator:main", host="0.0.0.0")
         .with_name("hash_service")
         .with_bind_ports(8080, 8080) as hash
     ):

@@ -33,5 +33,5 @@ jobs:
     - name: prepare
       run: echo "docker-compose up -d"; sleep 10
     - name: run test
-      run: echo "run e2e scenario"
+      run: echo "run e2e scenario"; sleep 60
 

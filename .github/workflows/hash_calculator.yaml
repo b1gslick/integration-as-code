@@ -14,8 +14,8 @@ jobs:
     with:
       name: "Build calculator"
       image_url: t1mon1106/hash-calculator
-      docker_filename: ./backend/Dockerfile
-      docker_context: ./hash_calculator.yaml/
+      docker_filename: ./hash_calculator/Dockerfile
+      docker_context: ./hash_calculator
     secrets:
       DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
       DOCKER_PASSWORD : ${{ secrets.DOCKER_PASSWORD }}

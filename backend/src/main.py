@@ -1,6 +1,3 @@
-import logging
-
-import uvicorn
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
@@ -10,7 +7,7 @@ from service.database import engine
 
 
 def create_app() -> FastAPI:
-    # models.Base.metadata.create_all(bind=engine)
+    models.Base.metadata.create_all(bind=engine)
     app = FastAPI()
     app.include_router(router)
 
