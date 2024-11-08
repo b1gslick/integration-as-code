@@ -1,5 +1,5 @@
 ---
-name: run wihout test-containers 
+name: run with test-containers
 
 permissions:
   contents: read
