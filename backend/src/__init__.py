@@ -2,7 +2,7 @@ import os
 
 from dotenv import load_dotenv
 
-from app.settings import Settings
+from src.settings import Settings
 
 load_dotenv()
 

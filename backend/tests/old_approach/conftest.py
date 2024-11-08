@@ -3,7 +3,7 @@ from collections.abc import AsyncGenerator
 import pytest_asyncio
 from httpx import ASGITransport, AsyncClient
 
-from app.main import create_app
+from src.main import create_app
 
 
 @pytest_asyncio.fixture()

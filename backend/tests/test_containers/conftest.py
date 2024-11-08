@@ -1,13 +1,12 @@
 from collections.abc import AsyncGenerator, Generator
 from typing import Any
-import logging
 
 import pytest
 import pytest_asyncio
 from httpx import ASGITransport, AsyncClient
-from testcontainers.postgres import PostgresContainer, os
+from testcontainers.postgres import PostgresContainer
 
-from app.main import create_app
+from src.main import create_app
 from tests.hash_service import HashService
 
 

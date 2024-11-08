@@ -4,13 +4,13 @@ import uvicorn
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-from app.routers import router
+from src.routers import router
 from service import models
 from service.database import engine
 
 
 def create_app() -> FastAPI:
-    models.Base.metadata.create_all(bind=engine)
+    # models.Base.metadata.create_all(bind=engine)
     app = FastAPI()
     app.include_router(router)
 
@@ -27,8 +27,3 @@ def create_app() -> FastAPI:
         allow_headers=["*"],
     )
     return app
-
-
-if __name__ == "__main__":
-    logger = logging.getLogger("uvicorn.error")
-    uvicorn.run(create_app(), log_level="trace")

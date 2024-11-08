@@ -1,9 +1,8 @@
-import logging
 import uuid
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
 
-from app.utils import calculate_hash
+from src.utils import calculate_hash
 from service import models, schemas
 from service.database import get_db
 

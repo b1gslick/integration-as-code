@@ -1,8 +1,7 @@
-import logging
 import requests
 import json
 
-from app import settings
+from src import settings
 
 
 async def calculate_hash(data: str):

@@ -1,0 +1,18 @@
+---
+name: end to end example pipeline
+
+permissions:
+  contents: read
+  checks: write
+  id-token: write
+
+on: [push]
+
+jobs:
+  build:
+    uses: ./.github/reusabe-steps/docker-build.yml
+    with:
+      name: "Build backend"
+      image_url: t1mon1106/integation-as-code
+      docker_filename: ./backend/Dockerfile
+      docker_context: ./backend/
