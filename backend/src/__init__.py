@@ -1,10 +1,10 @@
 import os
 
-from dotenv import load_dotenv
+# from dotenv import load_dotenv
 
 from src.settings import Settings
 
-load_dotenv()
+# load_dotenv()
 
 settings = Settings(
     db_drivername=os.environ.get("db_drivername", "postgresql"),
