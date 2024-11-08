@@ -12,7 +12,6 @@ jobs:
   unit-tests:
     uses: ./.github/workflows/pytest.yml
     with:
-      dir: backend
       name: unit-tests
   build:
     uses: ./.github/workflows/docker-build.yml

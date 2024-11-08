@@ -6,9 +6,6 @@ on:
       name:
         type: "string"
         required: true
-      dir:
-        type: "string"
-        description: 'path to test directory'
 
 jobs:
   unit-tests:
@@ -30,6 +27,6 @@ jobs:
         with:
           poetry-version: ${{ matrix.poetry-version }}
       - name: Install poetry dep
-        run: cd ${{ input.dir }} && poetry install --no-root
+        run: cd ./backend && poetry install --no-root
       - name: Run the automated tests (for example)
         run: poetry run pytest -v
