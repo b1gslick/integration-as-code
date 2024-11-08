@@ -30,6 +30,12 @@ exclude = ["venv", ".venv", "alembic"]
 [tool.poetry.group.test.dependencies]
 pytest = "7.4.0"
 pytest-asyncio = "0.21.0"
+pytest-mock = "3.11.1"
+pytest-cov = "4.1.0"
+pytest-env = "0.8.2"
+pre-commit = "3.3.3"
+coverage = "^7.4.4"
+faker = "^28.4.1"
 testcontainers = "^4.8.1"
 
 [tool.pytest.ini_options]
@@ -38,7 +44,16 @@ log_cli = true
 log_cli_level = "DEBUG"
 log_cli_format = "%(asctime)s [%(levelname)s] %(filename)s:%(lineno)s %(message)s"
 log_cli_date_format = "%Y-%m-%d %H:%M:%S"
-env = ['D:LOG_LEVEL=WARN']
+env = [
+  'D:LOG_LEVEL=WARN',
+  'D:db_drivername=postgresql',
+  'D:db_username=postgres',
+  'D:db_password=postgres',
+  'D:db_name=postgres',
+  'D:db_host=localhost',
+  'D:db_port=5432',
+  'D:hash_service=http://localhost:8080',
+]
 testpaths = ["tests"]
 
 [tool.ruff]

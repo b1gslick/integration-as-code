@@ -25,14 +25,6 @@ jobs:
         run: cd ./backend && poetry install --no-root
       - name: run test with bash script
         run: cd ./backend && poetry run pytest -k test_containers
-        env:
-          db_drivername: "postgresql"
-          db_username: "postgres"
-          db_password: "postgres"
-          db_name: "postgres"
-          db_host: "localhost"
-          db_port: "5432"
-          hash_service: "http://localhost:8080"
 
   build:
     needs: [tests]

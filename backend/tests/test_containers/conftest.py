@@ -10,7 +10,7 @@ from src.main import create_app
 from tests.hash_service import HashService
 
 
-@pytest.fixture(scope="function", autouse=True)
+@pytest.fixture(scope="session", autouse=True)
 def database_container_setup() -> Generator[PostgresContainer, Any, Any]:
     with PostgresContainer(
         "postgres:16-alpine",
