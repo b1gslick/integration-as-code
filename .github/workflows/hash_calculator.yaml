@@ -1,0 +1,21 @@
+---
+name: run wihout test-containers 
+
+permissions:
+  contents: read
+  checks: write
+  id-token: write
+
+on: [push]
+
+jobs:
+  build:
+    uses: ./.github/workflows/docker-build.yml
+    with:
+      name: "Build calculator"
+      image_url: t1mon1106/hash-calculator
+      docker_filename: ./backend/Dockerfile
+      docker_context: ./hash_calculator.yaml/
+    secrets:
+      DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+      DOCKER_PASSWORD : ${{ secrets.DOCKER_PASSWORD }}

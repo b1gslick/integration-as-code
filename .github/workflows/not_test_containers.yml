@@ -11,7 +11,28 @@ on: [push]
 jobs:
   tests:
     runs-on: ubuntu-latest
+
+    services:
+      postgres:
+        image: postgres:16-alpine
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_DBNAME: postgres
+          POSTGRES_PASSWORD: postgres
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+      hash-calculator:
+        image: t1mon1106/hash-calculator:main
+        env:
+          host: 0.0.0.0
+          port: 8080
+
     steps:
+
       - uses: actions/checkout@v4
       - name: Install Python
         uses: actions/setup-python@v4
@@ -24,7 +45,15 @@ jobs:
       - name: Install poetry dep
         run: cd ./backend && poetry install --no-root
       - name: run test with bash script
-        run: cd ./backend/tests && ./run_test.sh
+        run: cd ./backend && poetry run pytest -k old_approach
+        env:
+          db_drivername: "postgresql"
+          db_username: "postgres"
+          db_password: "postgres"
+          db_name: "postgres"
+          db_host: "postgres"
+          db_port: "5432"
+          hash_service: "http://hash-calculator:8080"
 
   build:
     uses: ./.github/workflows/docker-build.yml
