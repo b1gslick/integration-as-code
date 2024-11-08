@@ -19,6 +19,8 @@ jobs:
           POSTGRES_USER: postgres
           POSTGRES_DBNAME: postgres
           POSTGRES_PASSWORD: postgres
+        ports:
+          - 5432:5432
         options: >-
           --health-cmd pg_isready
           --health-interval 10s
@@ -27,6 +29,8 @@ jobs:
 
       hash-calculator:
         image: t1mon1106/hash-calculator:main
+        ports:
+          - 8080:8080
         env:
           host: 0.0.0.0
           port: 8080
