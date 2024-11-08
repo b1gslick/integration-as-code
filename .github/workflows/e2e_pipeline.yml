@@ -10,7 +10,7 @@ on: [push]
 
 jobs:
   build:
-    uses: ./.github/reusable-steps/docker-build.yml
+    uses: ./.github/workflows/docker-build.yml
     with:
       name: "Build backend"
       image_url: t1mon1106/integation-as-code
