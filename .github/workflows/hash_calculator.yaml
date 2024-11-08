@@ -1,5 +1,5 @@
 ---
-name: run wihout test-containers 
+name: build hash_calculator
 
 permissions:
   contents: read

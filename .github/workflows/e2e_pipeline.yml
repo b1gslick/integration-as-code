@@ -9,12 +9,13 @@ permissions:
 on: [push]
 
 jobs:
-  unit-tests:
+  tests:
     uses: ./.github/workflows/pytest.yml
     with:
       name: unit-tests
 
   build:
+    needs: [tests]
     uses: ./.github/workflows/docker-build.yml
     with:
       name: "Build backend"
@@ -26,6 +27,7 @@ jobs:
       DOCKER_PASSWORD : ${{ secrets.DOCKER_PASSWORD }}
 
   endToEnd:
+    needs: [build]
     runs-on: ubuntu-latest
     steps:
     - name: prepare

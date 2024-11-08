@@ -35,6 +35,7 @@ jobs:
           hash_service: "http://localhost:8080"
 
   build:
+    needs: [tests]
     uses: ./.github/workflows/docker-build.yml
     with:
       name: "Build backend"

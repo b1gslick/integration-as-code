@@ -32,7 +32,6 @@ jobs:
           port: 8080
 
     steps:
-
       - uses: actions/checkout@v4
       - name: Install Python
         uses: actions/setup-python@v4
@@ -56,6 +55,7 @@ jobs:
           hash_service: "http://hash-calculator:8080"
 
   build:
+    needs: [tests]
     uses: ./.github/workflows/docker-build.yml
     with:
       name: "Build backend"
