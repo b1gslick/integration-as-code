@@ -26,7 +26,7 @@ jobs:
       DOCKER_PASSWORD : ${{ secrets.DOCKER_PASSWORD }}
 
   endToEnd:
-    runs-on: ubuntu:latest
+    runs-on: ubuntu-latest
     steps:
     - name: prepare
       run: echo "docker-compose up -d"; sleep 10

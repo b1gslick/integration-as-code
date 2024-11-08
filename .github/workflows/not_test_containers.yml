@@ -1,0 +1,39 @@
+---
+name: run wihout test-containers 
+
+permissions:
+  contents: read
+  checks: write
+  id-token: write
+
+on: [push]
+
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: 3.12
+      - name: Run image
+        uses: abatilo/actions-poetry@v2
+        with:
+          poetry-version: 1.8.4
+      - name: Install poetry dep
+        run: cd ./backend && poetry install --no-root
+      - name: run test with bash script
+        run: cd ./backend/tests && ./run_test.sh
+
+  build:
+    uses: ./.github/workflows/docker-build.yml
+    with:
+      name: "Build backend"
+      image_url: t1mon1106/integation-as-code
+      docker_filename: ./backend/Dockerfile
+      docker_context: ./backend/
+    secrets:
+      DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+      DOCKER_PASSWORD : ${{ secrets.DOCKER_PASSWORD }}
+
