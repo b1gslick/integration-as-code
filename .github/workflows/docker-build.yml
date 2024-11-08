@@ -23,7 +23,7 @@ on:
 
 jobs:
   docker-build:
-    name: "{{ inputs.name }}"
+    name: "${{ inputs.name }}"
     runs-on: ubuntu-latest
     steps:
       - name: Check out the repo
