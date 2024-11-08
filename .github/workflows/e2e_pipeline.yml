@@ -16,3 +16,4 @@ jobs:
       image_url: t1mon1106/integation-as-code
       docker_filename: ./backend/Dockerfile
       docker_context: ./backend/
+

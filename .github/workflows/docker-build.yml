@@ -17,10 +17,10 @@ on:
       docker_context:
         type: "string"
         required: true
-    secrets:
-      DOCKER_USERNAME:
-      DOCKER_PASSWORD:
-
+    # secrets:
+    #   DOCKER_USERNAME:
+    #   DOCKER_PASSWORD:
+    #
 jobs:
   docker-build:
     name: "${{ inputs.name }}"
