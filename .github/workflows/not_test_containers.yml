@@ -47,7 +47,7 @@ jobs:
           poetry-version: 1.8.4
       - name: Install poetry dep
         run: cd ./backend && poetry install --no-root
-      - name: run test with
+      - name: run test without test containers
         run: cd ./backend && poetry run pytest -k old_approach
         env:
           db_drivername: "postgresql"
