@@ -43,16 +43,16 @@ jobs:
           poetry-version: 1.8.4
       - name: Install poetry dep
         run: cd ./backend && poetry install --no-root
-      - name: run test with bash script
+      - name: run test with
         run: cd ./backend && poetry run pytest -k old_approach
         env:
           db_drivername: "postgresql"
           db_username: "postgres"
           db_password: "postgres"
           db_name: "postgres"
-          db_host: "postgres"
+          db_host: "localhost"
           db_port: "5432"
-          hash_service: "http://hash-calculator:8080"
+          hash_service: "http://localhost:8080"
 
   build:
     needs: [tests]
