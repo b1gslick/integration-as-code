@@ -17,9 +17,12 @@ on:
       docker_context:
         type: "string"
         required: true
-    # secrets:
-    #   DOCKER_USERNAME:
-    #   DOCKER_PASSWORD:
+      username:
+        type: "string"
+        required: true
+      password:
+        type: "string"
+        required: true
     #
 jobs:
   docker-build:
