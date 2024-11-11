@@ -37,9 +37,9 @@ const App = () => {
     }
   };
   const selectedRow = async (ev: any) => {
-    console.log(largeData);
+    setIsNew(false);
     setCurrentId(ev.target.value[0]);
-    if (ev.target.value === "") {
+    if (ev.target.value[0] === "") {
       setIsNew(true);
     }
     setLargeData(ev.target.value[1]);
